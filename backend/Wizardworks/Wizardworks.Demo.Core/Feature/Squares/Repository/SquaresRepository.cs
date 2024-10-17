@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Wizardworks.Demo.Core.Config;
 using Wizardworks.Demo.Core.Feature.Squares.Client;
 using Wizardworks.Demo.Core.Feature.Squares.Model;
+using Wizardworks.Demo.Core.Infrastructure.Exceptions;
 
 namespace Wizardworks.Demo.Core.Feature.Squares.Repository;
 internal class SquaresRepository(
@@ -36,7 +37,7 @@ internal class SquaresRepository(
         var colorAlreadyExists = state.Squares.Any(x => x.Color.Equals(square.Color, StringComparison.OrdinalIgnoreCase));
         if (colorAlreadyExists)
         {
-            throw new Exception("Colors should not have duplicates!");
+            throw new ColorDuplicatedException(square.Color);
         }
 
         state.Squares.Add(square);
