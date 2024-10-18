@@ -1,54 +1,44 @@
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
+
 import { Square } from "../shared/types";
 
 const API_URL =
   "https://wizardworksdemoapi-api.orangegrass-e973561e.westeurope.azurecontainerapps.io";
 
-// let _mockedSquares: Square[] = [
-//   {
-//     color: "red",
-//     position: {
-//       x: 0,
-//       y: 0,
-//     },
-//   },
-//   {
-//     color: "green",
-//     position: {
-//       x: 1,
-//       y: 0,
-//     },
-//   },
-//   {
-//     color: "blue",
-//     position: {
-//       x: 0,
-//       y: 1,
-//     },
-//   },
-// ];
+const instance = axios.create({
+  baseURL: API_URL,
+  withCredentials: true,
+});
+
+const STORAGE_USER_ID_KEY = "user_id";
+
+instance.interceptors.request.use((config) => {
+  let guid = sessionStorage.getItem(STORAGE_USER_ID_KEY);
+
+  if (guid === null) {
+    guid = uuidv4();
+    sessionStorage.setItem(STORAGE_USER_ID_KEY, guid as string);
+  }
+
+  config.headers["user_id"] = guid;
+  return config;
+});
 
 export const addSquare = (newSquare: Square) => {
-  return fetch(`${API_URL}/squares/add`, {
+  return instance({
     method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+    url: `${API_URL}/squares/add`,
+    data: {
+      ...newSquare,
     },
-    body: JSON.stringify(newSquare),
-  }).then((res) => res.json());
-
-  // return new Promise<Square[]>((resolve) => {
-  //   _mockedSquares = [..._mockedSquares, newSquare];
-  //   resolve(_mockedSquares);
-  // });
+    withCredentials: true,
+  }).then((res) => res.data);
 };
 
 export const getSquares = () => {
-  return fetch(`${API_URL}/squares/get`).then((res) => res.json());
-
-  // return new Promise<Square[]>((resolve) => {
-  //   setTimeout(() => {
-  //     resolve(_mockedSquares);
-  //   }, 150);
-  // });
+  return instance({
+    method: "GET",
+    url: `${API_URL}/squares/get`,
+  }).then((res) => res.data);
 };

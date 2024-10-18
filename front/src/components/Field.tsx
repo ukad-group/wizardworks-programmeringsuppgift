@@ -11,7 +11,6 @@ export const Field: FunctionComponent<FieldProps> = ({ squares }) => {
 
   useEffect(() => {
     if (squares) {
-      console.log("draw");
       drawSquares(canvasRef.current as HTMLCanvasElement, squares, 20, 5);
     }
   }, [squares]);

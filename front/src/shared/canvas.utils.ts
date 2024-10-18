@@ -37,7 +37,6 @@ export function drawSquares(
       if (color !== null) {
         const x = startX + col * (squaresSize + squaresMargin);
         const y = startY + row * (squaresSize + squaresMargin);
-        console.log("pos:", x, y, squaresSize, color);
         drawSquare(
           context as CanvasRenderingContext2D,
           x,
