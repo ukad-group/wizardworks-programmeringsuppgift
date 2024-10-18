@@ -3,11 +3,10 @@ import { v4 as uuidv4 } from "uuid";
 
 import { Square } from "../shared/types";
 
-const API_URL =
-  "https://wizardworksdemoapi-api.orangegrass-e973561e.westeurope.azurecontainerapps.io";
+const API_BASE_URL = __API_BASE_URL__;
 
 const instance = axios.create({
-  baseURL: API_URL,
+  baseURL: API_BASE_URL,
   withCredentials: true,
 });
 
@@ -28,7 +27,7 @@ instance.interceptors.request.use((config) => {
 export const addSquare = (newSquare: Square) => {
   return instance({
     method: "POST",
-    url: `${API_URL}/squares/add`,
+    url: "/squares/add",
     data: {
       ...newSquare,
     },
@@ -39,6 +38,6 @@ export const addSquare = (newSquare: Square) => {
 export const getSquares = () => {
   return instance({
     method: "GET",
-    url: `${API_URL}/squares/get`,
+    url: "/squares/get",
   }).then((res) => res.data);
 };
