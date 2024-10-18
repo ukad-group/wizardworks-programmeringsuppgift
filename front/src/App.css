@@ -1,0 +1,13 @@
+#root {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100dvw;
+  height: 100dvh;
+  align-items: center;
+  justify-content: center;
+}
