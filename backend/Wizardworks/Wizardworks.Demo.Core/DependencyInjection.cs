@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Azure.Storage.Blobs;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Wizardworks.Demo.Core.Config;
 using Wizardworks.Demo.Core.Feature.Squares.Repository;
-using Azure.Storage.Blobs;
 
 namespace Wizardworks.Demo.Core;
 public static class DependencyInjection

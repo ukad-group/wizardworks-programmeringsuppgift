@@ -1,13 +1,5 @@
-﻿using Azure;
-using Azure.Storage.Blobs;
+﻿using Azure.Storage.Blobs;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using Wizardworks.Demo.Core.Config;
 using Wizardworks.Demo.Core.Feature.Squares.Client;
 using Wizardworks.Demo.Core.Feature.Squares.Model;
@@ -30,7 +22,7 @@ internal class SquaresRepository(
     public async Task<SquaresModel> AddAsync(string clientId, SquareItemModel square)
     {
         var state = await GetFromBlobAsync<SquaresModel>(clientId);
-        
+
         state ??= new SquaresModel();
 
         // ensure duplicates not created 
