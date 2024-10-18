@@ -26,7 +26,7 @@ public class GlobalExceptionHandlingMiddleware : IMiddleware
 
             switch (exception)
             {
-                case ColorDuplicatedException:
+                case ColorDuplicatedException or PositionDuplicatedException:
                     problemDetails.Status = StatusCodes.Status400BadRequest;
                     break;
                 default:

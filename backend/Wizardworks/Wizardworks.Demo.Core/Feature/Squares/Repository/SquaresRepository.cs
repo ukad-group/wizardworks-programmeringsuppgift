@@ -39,6 +39,11 @@ internal class SquaresRepository(
         {
             throw new ColorDuplicatedException(square.Color);
         }
+        var positionAlreadyExists = state.Squares.Any(x => x.Position == square.Position);
+        if (positionAlreadyExists)
+        {
+            throw new PositionDuplicatedException(square.Position);
+        }
 
         state.Squares.Add(square);
 
