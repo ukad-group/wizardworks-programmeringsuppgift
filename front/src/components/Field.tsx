@@ -18,7 +18,7 @@ export const Field: FunctionComponent<FieldProps> = ({ squares }) => {
 
   return (
     <canvas
-      style={{ border: "1px solid white" }}
+      style={{ border: "1px solid #0e0e0e", backgroundColor: "#42AAFF" }}
       ref={canvasRef}
       id="squares-field"
       width="400"

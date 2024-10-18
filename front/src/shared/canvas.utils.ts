@@ -7,8 +7,11 @@ export function drawSquare(
   size: number,
   color: string
 ) {
-  context.fillStyle = color;
+  context.fillStyle = "#000";
   context.fillRect(x, y, size, size);
+
+  context.fillStyle = color;
+  context.fillRect(x + 1, y + 1, size - 2, size - 2);
 }
 
 export function drawSquares(

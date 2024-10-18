@@ -12,10 +12,10 @@ import {
 } from "./shared/array.utils";
 
 function App() {
-  const [squaresState, updateSquaresState] = useState<Square[] | null>(null);
+  const [squaresState, updateSquaresState] = useState<Square[]>([]);
   const [isLoading, setLoading] = useState(false);
   const squares2d = useMemo(() => {
-    if (squaresState === null) {
+    if (squaresState.length === 0) {
       return [];
     }
     return fill2dArrayWithSquares(squaresState);
@@ -23,16 +23,16 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-    getSquares().then((squares) => {
-      updateSquaresState(squares);
+    getSquares().then((data) => {
+      updateSquaresState(data.squares);
       setLoading(false);
     });
   }, []);
 
   const addNewSquare = (square: Square) => {
     setLoading(true);
-    addSquare(square).then((newSquares) => {
-      updateSquaresState(newSquares);
+    addSquare(square).then((data) => {
+      updateSquaresState(data.squares);
       setLoading(false);
     });
   };
@@ -41,7 +41,7 @@ function App() {
     let newSquareColor = generateRandomHexColor();
 
     // if we have now squares yet
-    if (squaresState === null) {
+    if (squaresState.length === 0) {
       return addNewSquare({
         color: newSquareColor,
         position: {
@@ -81,7 +81,7 @@ function App() {
   return (
     <div className="container">
       <button disabled={isLoading} onClick={handleButtonClick}>
-        add square
+        Lägg till ruta
       </button>
       {squaresState && <Field squares={squares2d} />}
     </div>
